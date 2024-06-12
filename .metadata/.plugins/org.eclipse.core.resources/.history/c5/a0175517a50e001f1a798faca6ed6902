@@ -1,0 +1,124 @@
+package factory_design;
+
+// Abstract Factory
+interface GUIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
+}
+
+// Concrete Factory - Windows
+class WindowsFactory implements GUIFactory {
+    @Override
+    public Button createButton() {
+        return new WindowsButton();
+    }
+
+    @Override
+    public Checkbox createCheckbox() {
+        return new WindowsCheckbox();
+    }
+}
+
+// Concrete Factory - macOS
+class MacOSFactory implements GUIFactory {
+    @Override
+    public Button createButton() {
+        return new MacOSButton();
+    }
+
+    @Override
+    public Checkbox createCheckbox() {
+        return new MacOSCheckbox();
+    }
+}
+
+// Concrete Factory - Linux
+class LinuxFactory implements GUIFactory {
+    @Override
+    public Button createButton() {
+        return new LinuxButton();
+    }
+
+    @Override
+    public Checkbox createCheckbox() {
+        return new LinuxCheckbox();
+    }
+}
+
+// Abstract Product - Button
+interface Button {
+    void paint();
+}
+
+// Concrete Product - Windows Button
+class WindowsButton implements Button {
+    @Override
+    public void paint() {
+        System.out.println("Windows stil butonu");
+    }
+}
+
+// Concrete Product - MacOS Button
+class MacOSButton implements Button {
+    @Override
+    public void paint() {
+        System.out.println("MacOS stil butonu");
+    }
+}
+
+// Concrete Product - Linux Button
+class LinuxButton implements Button {
+    @Override
+    public void paint() {
+        System.out.println("Linux stil butonu");
+    }
+}
+
+// Abstract Product - Checkbox
+interface Checkbox {
+    void paint();
+}
+
+// Concrete Product - Windows Checkbox
+class WindowsCheckbox implements Checkbox {
+    @Override
+    public void paint() {
+        System.out.println("Windows stili checkbox");
+    }
+}
+
+// Concrete Product - MacOS Checkbox
+class MacOSCheckbox implements Checkbox {
+    @Override
+    public void paint() {
+        System.out.println("MacOS stili checkbox");
+    }
+}
+
+// Concrete Product - Linux Checkbox
+class LinuxCheckbox implements Checkbox {
+    @Override
+    public void paint() {
+        System.out.println("Linux stili checkbox");
+    }
+}
+
+// Client
+public class factory_design {
+    public static void main(String[] args) {
+        // For Windows platform
+        GUIFactory windowsFactory = new WindowsFactory();
+        Application windowsApp = new Application(windowsFactory);
+        windowsApp.createUI();
+
+        // For macOS platform
+        GUIFactory macOSFactory = new MacOSFactory();
+        Application macOSApp = new Application(macOSFactory);
+        macOSApp.createUI();
+
+        // For Linux platform
+        GUIFactory linuxFactory = new LinuxFactory();
+        Application linuxApp = new Application(linuxFactory);
+        linuxApp.createUI();
+    }
+}
